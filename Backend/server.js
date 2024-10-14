@@ -9,14 +9,13 @@ const analyticsRoutes = require('./routes/analytics.route.js');
 const connectDB = require('./lib/db.js');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const path = require('path');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 5000;
 
-// Middleware to log incoming requests
+// Log incoming requests
 app.use((req, res, next) => {
     console.log("Request Origin:", req.headers.origin); // Log the incoming origin
     next();
@@ -25,7 +24,7 @@ app.use((req, res, next) => {
 // CORS configuration
 app.use(
     cors({
-        origin: "https://ecommerce-frontend-lake-eight.vercel.app",
+        origin: "*", // Temporarily allow all origins for debugging
         methods: "GET,POST,PUT,DELETE",
         credentials: true,
     })
