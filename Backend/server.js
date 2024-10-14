@@ -16,10 +16,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.SERVER_PORT || 5000;
 
-app.use(cors({
-    origin: '*',
-    credentials: true,
-}));
+
+
+app.use(
+    cors({
+        origin: "https://ecommerce-frontend-lake-eight.vercel.app",
+        methods: "GET,POST,PUT,DELETE",
+        credentials: true,
+    })
+);
 
 app.use(express.json({
     limit: '10mb'
