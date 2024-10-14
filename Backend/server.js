@@ -22,13 +22,14 @@ app.use((req, res, next) => {
 });
 
 // CORS configuration
-app.use(
-    cors({
-        origin: "*", // Temporarily allow all origins for debugging
-        methods: "GET,POST,PUT,DELETE",
-        credentials: true,
-    })
-);
+// app.use(
+//     cors({
+//         origin: "*", // Temporarily allow all origins for debugging
+//         methods: "GET,POST,PUT,DELETE",
+//         credentials: true,
+//     })
+// );
+app.use(cors());
 
 // Middleware for JSON parsing
 app.use(express.json({ limit: '10mb' }));
