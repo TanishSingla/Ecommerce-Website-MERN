@@ -14,7 +14,7 @@ import path from 'path';
 dotenv.config();
 
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 5000;
@@ -35,13 +35,13 @@ app.use("/api/v1/coupons", couponsRoutes);
 app.use("/api/v1/payments", paymentsRoutes);
 app.use("/api/v1/analytics", analyticsRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'frontend/dist')));
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-    })
-}
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+//     })
+// }
 
 app.listen(PORT, () => {
     console.log(`Server Running on Port ${PORT}`)
