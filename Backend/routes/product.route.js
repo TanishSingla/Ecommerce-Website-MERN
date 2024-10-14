@@ -1,7 +1,14 @@
-import express from 'express';
-import { createProduct, deleteProduct, getAllProduct, getFeaturedProducts, getProductsByCategory, getRecommendedProducts, toggleFeatureproducts } from '../controllers/product.controller.js';
-import { isAdmin, isAuthenticated } from '../middleware/auth.middleware.js';
-
+const express = require('express');
+const {
+    createProduct,
+    deleteProduct,
+    getAllProduct,
+    getFeaturedProducts,
+    getProductsByCategory,
+    getRecommendedProducts,
+    toggleFeatureproducts
+} = require('../controllers/product.controller.js');
+const { isAdmin, isAuthenticated } = require('../middleware/auth.middleware.js');
 
 const router = express.Router();
 
@@ -13,4 +20,4 @@ router.post("/", isAuthenticated, isAdmin, createProduct);
 router.patch("/:id", isAuthenticated, isAdmin, toggleFeatureproducts);
 router.delete("/:id", isAuthenticated, isAdmin, deleteProduct);
 
-export default router;
+module.exports = router; // Change export statement to CommonJS syntax

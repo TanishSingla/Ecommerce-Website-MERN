@@ -1,18 +1,17 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import authRoutes from './routes/auth.route.js'
-import productRoutes from './routes/product.route.js'
-import cartRoutes from './routes/cart.route.js'
-import couponsRoutes from './routes/coupons.route.js'
-import paymentsRoutes from './routes/payment.route.js'
-import analyticsRoutes from './routes/analytics.route.js'
-import { connectDB } from './lib/db.js';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import path from 'path';
+const express = require('express');
+const dotenv = require('dotenv');
+const authRoutes = require('./routes/auth.route.js');
+const productRoutes = require('./routes/product.route.js');
+const cartRoutes = require('./routes/cart.route.js');
+const couponsRoutes = require('./routes/coupons.route.js');
+const paymentsRoutes = require('./routes/payment.route.js');
+const analyticsRoutes = require('./routes/analytics.route.js');
+const connectDB = require('./lib/db.js');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const path = require('path');
 
 dotenv.config();
-
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 5000;
@@ -22,7 +21,6 @@ app.use(cors({
     credentials: true,
 }));
 
-
 app.use(express.json({
     limit: '10mb'
 }));
@@ -30,8 +28,8 @@ app.use(express.json({
 app.get("/", (req, res) => {
     res.json({
         message: "working"
-    })
-})
+    });
+});
 
 app.use(cookieParser());
 
@@ -44,9 +42,6 @@ app.use("/api/v1/analytics", analyticsRoutes);
 
 
 app.listen(PORT, () => {
-    console.log(`Server Running on Port ${PORT}`)
+    console.log(`Server Running on Port ${PORT}`);
     connectDB();
-})
-
-
-
+});

@@ -1,12 +1,12 @@
-import express from 'express'
-import { addToCart, getCartProducts, removeAllFromCart, updateQuantity } from '../controllers/cart.controller.js';
-import { isAuthenticated } from '../middleware/auth.middleware.js';
+const express = require('express');
+const { addToCart, getCartProducts, removeAllFromCart, updateQuantity } = require('../controllers/cart.controller.js');
+const { isAuthenticated } = require('../middleware/auth.middleware.js');
 
 const router = express.Router();
 
 router.get("/", isAuthenticated, getCartProducts);
-router.post("/", isAuthenticated, addToCart);
+router.post("/", isAuthenticated, addToCart); 
 router.delete("/", isAuthenticated, removeAllFromCart);
 router.put("/:id", isAuthenticated, updateQuantity);
 
-export default router;  
+module.exports = router; // Change export statement to CommonJS syntax

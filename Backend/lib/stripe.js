@@ -1,6 +1,8 @@
-import Stripe from 'stripe';
-import dotenv from 'dotenv';
+const Stripe = require('stripe'); // Importing Stripe
+const dotenv = require('dotenv'); // Importing dotenv
 
-dotenv.config();
+dotenv.config(); // Loading environment variables
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Creating a Stripe client
+
+module.exports = { stripe }; // Exporting the Stripe client

@@ -1,9 +1,8 @@
-import Order from "../models/order.model.js";
-import Product from "../models/product.model.js";
-import User from "../models/user.model.js";
+const Order = require("../models/order.model.js");
+const Product = require("../models/product.model.js");
+const User = require("../models/user.model.js");
 
-
-export const getAnalyticsData = async () => {
+const getAnalyticsData = async () => {
     const totalUsers = await User.countDocuments();
 
     const totalProducts = await Product.countDocuments();
@@ -28,7 +27,7 @@ export const getAnalyticsData = async () => {
     };
 };
 
-export const getDailySalesData = async (startDate, endDate) => {
+const getDailySalesData = async (startDate, endDate) => {
     try {
         const dailySalesData = await Order.aggregate([
             {
@@ -49,17 +48,7 @@ export const getDailySalesData = async (startDate, endDate) => {
             { $sort: { _id: 1 } },
         ]);
 
-        // example of dailySalesData
-        // [
-        // 	{
-        // 		_id: "2024-08-18",
-        // 		sales: 12,
-        // 		revenue: 1450.75
-        // 	},
-        // ]
-
         const dateArray = getDatesInRange(startDate, endDate);
-        // console.log(dateArray) // ['2024-08-18', '2024-08-19', ... ]
 
         return dateArray.map((date) => {
             const foundData = dailySalesData.find((item) => item._id === date);
@@ -86,3 +75,5 @@ function getDatesInRange(startDate, endDate) {
 
     return dates;
 }
+
+module.exports = { getAnalyticsData, getDailySalesData }; // Exporting the functions

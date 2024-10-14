@@ -1,6 +1,6 @@
-import express from 'express';
-import { isAuthenticated } from '../middleware/auth.middleware.js';
-import { signup, login, logout, refreshToken, getProfile } from '../controllers/auth.controller.js';
+const express = require('express');
+const { isAuthenticated } = require('../middleware/auth.middleware.js');
+const { signup, login, logout, refreshToken, getProfile } = require('../controllers/auth.controller.js');
 
 const router = express.Router();
 
@@ -10,4 +10,4 @@ router.get("/logout", logout);
 router.get("/refresh-token", refreshToken);
 router.get("/profile", isAuthenticated, getProfile);
 
-export default router;
+module.exports = router; // Change export statement to CommonJS syntax

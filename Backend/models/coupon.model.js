@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const couponSchema = new mongoose.Schema({
     code: {
@@ -30,4 +30,4 @@ const couponSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 const Coupon = mongoose.model("Coupon", couponSchema);
-export default Coupon;
+module.exports = Coupon; // Change export statement to CommonJS syntax

@@ -1,6 +1,5 @@
-import mongoose from "mongoose";
-import bcrypt from 'bcryptjs'
-
+const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -17,7 +16,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Please enter password"],
-        minlength: [8, "Password must be atleast 8 characters long"],
+        minlength: [8, "Password must be at least 8 characters long"],
     },
     cartItems: [
         {
@@ -36,12 +35,11 @@ const userSchema = new mongoose.Schema({
         enum: ["customer", "admin"],
         default: "customer"
     },
-
 }, {
     timestamps: true
 });
 
-//pre-save hook to hash password before saving
+// Pre-save hook to hash password before saving
 userSchema.pre("save", async function (next) {
     if (!this.isModified("password")) return next();
     try {
@@ -54,12 +52,10 @@ userSchema.pre("save", async function (next) {
     }
 });
 
-//for password comparison
+// For password comparison
 userSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 }
 
-
-
 const User = mongoose.model("User", userSchema);
-export default User;
+module.exports = User; // Change export statement to CommonJS syntax

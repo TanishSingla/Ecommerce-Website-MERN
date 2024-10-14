@@ -1,6 +1,6 @@
-import express from "express";
-import { isAdmin, isAuthenticated } from "../middleware/auth.middleware.js";
-import { getAnalyticsData, getDailySalesData } from "../controllers/analytics.controller.js";
+const express = require("express");
+const { isAdmin, isAuthenticated } = require("../middleware/auth.middleware.js");
+const { getAnalyticsData, getDailySalesData } = require("../controllers/analytics.controller.js");
 
 const router = express.Router();
 
@@ -23,4 +23,4 @@ router.get("/", isAuthenticated, isAdmin, async (req, res) => {
     }
 });
 
-export default router;
+module.exports = router; // Change export statement to CommonJS syntax

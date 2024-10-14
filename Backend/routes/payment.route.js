@@ -1,13 +1,10 @@
-import express from 'express';
-import { isAuthenticated } from '../middleware/auth.middleware.js';
-import { checkoutSuccess, createCheckoutSession } from '../controllers/payments.controller.js';
-
-
+const express = require('express');
+const { isAuthenticated } = require('../middleware/auth.middleware.js');
+const { checkoutSuccess, createCheckoutSession } = require('../controllers/payments.controller.js');
 
 const router = express.Router();
 
+router.post('/create-checkout-session', isAuthenticated, createCheckoutSession);
+router.post('/checkout-success', isAuthenticated, checkoutSuccess);
 
-router.post('/create-checkout-session', isAuthenticated, createCheckoutSession)
-router.post('/checkout-success', isAuthenticated, checkoutSuccess)
-
-export default router;  
+module.exports = router; // Change export statement to CommonJS syntax
